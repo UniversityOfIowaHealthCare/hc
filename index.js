@@ -6,22 +6,17 @@ const print = require('./color-print');
 
 
 program
-    .version('0.0.1', '-v, --version')
-    .command('tag <realease-number> <name>')
+    .version('0.0.3', '-v, --version')
+    .command('tag <release_number> <name>')
     .description('Create a git tag following the specified format: yyyy-mm-dd.<release number today>.awesome_and_descriptive_tag_name')
     .action(tag);
 
-
 // Show an error on unknown commands
-program.on('command:*', function () {
+program.on('command:*', () => {
     const args = program.args.join(' ');
 
     error(`Invalid command: ${args}\nSee --help for a list of available commands.`)
 });
-
-
-program.parse(process.argv);
-
 
 function tag (releaseNumber, name) {
     if (isNaN(releaseNumber)) error('Release number must be a number');
@@ -34,7 +29,8 @@ function tag (releaseNumber, name) {
     childProcess.exec('git tag ' + tagName, (err, _) => {
         if (err) error(err.message);
 
-        return print.green(`Created git tag:\n${tagName}`)
+        print.green(`Created git tag:\n${tagName}`);
+        process.exit(0)
     })
 }
 
@@ -55,3 +51,10 @@ function error(message) {
     print.red('Error: ' + message);
     process.exit(1)
 }
+
+// If no command is specified, just show help
+if (!process.argv.slice(2).length) {
+    program.outputHelp();
+}
+
+program.parse(process.argv);

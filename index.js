@@ -2,26 +2,56 @@
 
 const program = require('commander');
 const childProcess = require('child_process');
+const print = require('./color-print');
+
 
 program
     .version('0.0.1', '-v, --version')
     .command('tag <realease-number> <name>')
-    .action((releaseNumber, name) => {
-        const tagName = `${new Date().toISOString().slice(0, 10)}.${releaseNumber}.${name.replace(/\s+/g, '_').toLowerCase()}`;
-        console.log('Creating a git tag called ' + tagName);
+    .description('Create a git tag following the specified format: yyyy-mm-dd.<release number today>.awesome_and_descriptive_tag_name')
+    .action(tag);
 
-        childProcess.exec(' git tag ' + tagName, (err, stdout) => {
-            if (err) {
-                return console.log("\x1b[31m%s\x1b[0m", err.message)
-            }
-            console.log(stdout);
-        })
-    });
 
-// error on unknown commands
+// Show an error on unknown commands
 program.on('command:*', function () {
-    console.error('Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' '));
-    process.exit(1);
+    const args = program.args.join(' ');
+
+    error(`Invalid command: ${args}\nSee --help for a list of available commands.`)
 });
 
+
 program.parse(process.argv);
+
+
+function tag (releaseNumber, name) {
+    if (isNaN(releaseNumber)) error('Release number must be a number');
+
+    const
+        formattedName = name.replace(/\s+/g, '_').toLowerCase(),
+        formattedDate = formatDate(new Date()),
+        tagName = `${formattedDate}.${releaseNumber}.${formattedName}`;
+
+    childProcess.exec('git tag ' + tagName, (err, _) => {
+        if (err) error(err.message);
+
+        return print.green(`Creating a git tag name: ${tagName}`)
+    })
+}
+
+// Format date string safely since the toISOString() function converts dates to UTC and may lose a day :/
+function formatDate(date) {
+    const year = date.getFullYear();
+    let
+        month = '' + (date.getMonth() + 1),
+        day = '' + date.getDate();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+function error(message) {
+    print.red('Error: ' + message);
+    process.exit(1)
+}

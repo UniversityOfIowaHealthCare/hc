@@ -1,0 +1,29 @@
+{
+  "name": "hc",
+  "version": "0.0.1",
+  "description": "A command line tool for version control consistency.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/UniversityOfIowaHealthCare/hc.git"
+  },
+  "keywords": [
+    "cli",
+    "command line",
+    "version control",
+    "git",
+    "git tag"
+  ],
+  "author": "sam_undefined",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UniversityOfIowaHealthCare/hc/issues"
+  },
+  "homepage": "https://github.com/UniversityOfIowaHealthCare/hc#readme",
+  "dependencies": {
+    "commander": "^2.19.0"
+  }
+}

@@ -34,7 +34,7 @@ function tag (releaseNumber, name) {
     childProcess.exec('git tag ' + tagName, (err, _) => {
         if (err) error(err.message);
 
-        return print.green(`Creating a git tag name: ${tagName}`)
+        return print.green(`Created git tag:\n${tagName}`)
     })
 }
 

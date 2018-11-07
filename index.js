@@ -6,7 +6,7 @@ const print = require('./color-print');
 
 
 program
-    .version('0.0.3', '-v, --version')
+    .version('0.0.4', '-v, --version')
     .command('tag <release_number> <name>')
     .description('Create a git tag following the specified format: yyyy-mm-dd.<release number today>.awesome_and_descriptive_tag_name')
     .action(tag);

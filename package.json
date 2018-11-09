@@ -1,6 +1,6 @@
 {
   "name": "@uihc/hc",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A command line tool for version control consistency.",
   "main": "lib/index.ts",
   "types" : "dist/index.d.ts",

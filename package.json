@@ -2,12 +2,13 @@
   "name": "@uihc/hc",
   "version": "0.0.4",
   "description": "A command line tool for version control consistency.",
-  "main": "index.js",
+  "main": "lib/index.ts",
+  "types" : "dist/index.d.ts",
   "scripts": {
-    "test": "test"
+    "build": "tsc"
   },
   "bin": {
-    "hc": "index.js"
+    "hc": "dist/index.ts"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/UniversityOfIowaHealthCare/hc#readme",
   "dependencies": {
+    "@types/node": "^10.12.4",
     "commander": "^2.19.0"
   }
 }

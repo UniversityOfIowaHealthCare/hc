@@ -4,6 +4,7 @@
 
 const RED = "\x1b[31m%s";
 const GREEN = "\x1b[32m%s";
+const YELLOW = "\x1b[33m%s";
 const RESET_COLOR = "\x1b[0m";
 
 function print(color: string, text: string) {
@@ -11,10 +12,7 @@ function print(color: string, text: string) {
 }
 
 export default {
-    red: function (text: string) {
-        return print(RED, text)
-    },
-    green: function (text: string) {
-        return print(GREEN, text)
-    }
+    red: (text: string) => print(RED, text),
+    green: (text: string) => print(GREEN, text),
+    info: (text: string) => print(YELLOW, text)
 };

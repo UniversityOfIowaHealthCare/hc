@@ -1,6 +1,6 @@
 {
   "name": "@uihc/hc",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "A command line tool for version control consistency.",
   "main": "lib/index.ts",
   "types": "dist/index.d.ts",
@@ -29,6 +29,7 @@
   "homepage": "https://github.com/UniversityOfIowaHealthCare/hc#readme",
   "dependencies": {
     "@types/node": "^10.12.4",
-    "commander": "^2.19.0"
+    "@types/yargs": "^12.0.1",
+    "yargs": "^12.0.2"
   }
 }

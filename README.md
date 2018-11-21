@@ -14,11 +14,14 @@ _Angle brackets (`<>`) mean an argument is required, square brackets (`[]`) mean
 ### Commands
 
 <dl>
-  <dt><h4><code>tag [release-number-today] "[message]"</code></h4></dt>
+  <dt><h4><code>tag</h4></code></dt>
   <dd>
     Create formatted git tags. Default tag format is <code>date.release-number.message</code>
     <br>
-    <i>Note: Be sure to wrap the message in quotes if you specify it.</i>
+    <br>
+    <b>Usage:</b>
+    <br>
+    <code>$ hc tag[release-number-today] "[message]"</code>
     <br>
     <br>
     <b>Basic Example</b>:
@@ -34,7 +37,7 @@ _Angle brackets (`<>`) mean an argument is required, square brackets (`[]`) mean
     <b>Options:</b>
     <ul>
         <li><code>--release-number -n</code>: Specify what release number this is today.</li>
-        <li><code>--message -m</code>: Give the tag a name and a message. HC creates annotated git tags with the same name and message.</li>
+        <li><code>--message -m</code>: Give the tag a name and a message. HC creates annotated git tags with the same name and message. <i>Note: Be sure to wrap the message in quotes if you specify it either as an option or an argument.</i></li>
     </ul>
     <br>
     <b>Details:</b>

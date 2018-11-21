@@ -1,6 +1,12 @@
 # HC
 Ongoing command line tool to make version control less painful and inconsistent.
 
+## Installation
+HC is an npm package. Be sure you have npm installed and then run this in your terminal:
+```
+$ npm i -g @uihc/hc
+```
+
 ## Usage
 
 ### Overview

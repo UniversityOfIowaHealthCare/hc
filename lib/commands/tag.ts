@@ -40,16 +40,25 @@ function releaseNumber(): Promise<number> {
 	print.info('Grabbing up to date release number..')
 
 	return new Promise((resolve, _) => {
-		childProcess.exec('git describe --tags', (err, tag) => {
+		childProcess.exec('git tag -l', (err, list) => {
 			if (err) error(err.message)
 
-			const
-				todaysFormattedDate = formatDate(new Date()),
-				todaysLatestReleaseRegex = new RegExp(todaysFormattedDate + /\.(\d+)\./.source),
-				releaseMatch = tag.match(todaysLatestReleaseRegex),
-				release = releaseMatch ? parseInt(releaseMatch[1]) + 1 : 0
+			if (!list) {
+				print.info('No previous tags found. Using 0 as release number.')
+				return resolve(0)
+			}
 
-			resolve(release)
+			childProcess.exec('git describe --tags', (err, tag) => {
+				if (err) error(err.message)
+
+				const
+					todaysFormattedDate = formatDate(new Date()),
+					todaysLatestReleaseRegex = new RegExp(todaysFormattedDate + /\.(\d+)\./.source),
+					releaseMatch = tag.match(todaysLatestReleaseRegex),
+					release = releaseMatch ? parseInt(releaseMatch[1]) + 1 : 0
+
+				return resolve(release)
+			})
 		})
 	})
 }

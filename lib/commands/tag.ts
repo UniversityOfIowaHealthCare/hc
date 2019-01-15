@@ -59,7 +59,7 @@ function lastCommitMessage(): Promise<string> {
 	print.info('Fetching last commit message to use as tag name..')
 
 	return new Promise<string>((resolve, _) => {
-		childProcess.exec('git reflog -1 | sed \'s/^.*: //\'', (err, message) => {
+		childProcess.exec('git log --oneline -1 | sed \'s/^....... //g\'', (err, message) => {
 			if (err) error(err.message)
 
 			resolve(message)

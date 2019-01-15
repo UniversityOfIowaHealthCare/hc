@@ -1,16 +1,8 @@
 import {error, formatDate} from '../utils'
 import * as childProcess from 'child_process'
 import print from '../color-print'
+import * as yargs from 'yargs'
 
-
-const tagOptions = {
-	releaseNumber: {
-		alias: 'r'
-	},
-	name: {
-		alias: 'n'
-	},
-}
 
 async function tag(yargs: any) {
 	const

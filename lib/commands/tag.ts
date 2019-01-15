@@ -75,9 +75,26 @@ function lastCommitMessage(): Promise<string> {
 	})
 }
 
+const tagOptions = () => {
+	yargs
+		.commandDir('./tag')
+		.option('releaseNumber', { alias: 'n' })
+		.option('message', { alias: 'm' })
+		.usage(usage)
+		.example('hc tag', 'Let hc find the proper release number and message.')
+		.example('hc tag -n 3', 'Specify just the release number.')
+		.example('hc tag -m "Just a message"', 'Specify only the message.')
+}
 
-exports.command = 'tag [releaseNumber] [name]'
+const usage =
+`Create a git tag in the format of <date>.<release>.<message>
+
+yyyy-mm-dd.<release number today>.awesome_tag_message
+
+You can omit the release number and/or message and hc will fill them in for you. If you don't pass in a message, hc uses the last git commit message (note that hc will only use the first commit message that was specified with the -m option). To figure out the release number, hc will either increment today's latest tag's release number or use 0 if there are no tags today.`
+
+exports.command = 'tag [releaseNumber] [message]'
 exports.aliases = 't'
-exports.describe = 'Create a git tag following the specified format: yyyy-mm-dd.<release number today>.awesome_and_descriptive_tag_name'
+exports.describe = 'Create a git tag following the specified format:\n\nyyyy-mm-dd.<release number today>.awesome_tag_message'
 exports.builder = tagOptions
 exports.handler = tag

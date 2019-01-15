@@ -9,4 +9,5 @@ program
 	.demandCommand(1, 'Please specify a command. See help output above')
 	.strict()
 	.help()
+	.wrap(100)
 	.argv
